@@ -1,3 +1,15 @@
+// Question 9: Write a program to create a book class. The Book class would have following private variables
+
+//String name;
+
+//int bookID;
+
+//String genres;
+
+//double price;
+
+//Create a constructor to initialize the values. Create getters and setters for variables.
+
 public class Book {
 
     private String name;
