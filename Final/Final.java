@@ -93,7 +93,6 @@ public class Final {
     // Question 4
     public int[] sumZero(int n) {
         //TODO: Write your code here
-        public int[] sumZero(int n) {
         int[] result = new int[n];
         int sum = 0;
         for (int i = 0; i < n-1; i++) {
