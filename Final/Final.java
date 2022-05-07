@@ -62,68 +62,64 @@ public class Final {
     }
 
     // Question 3
-        public int lengthOfLongestSubstring(String s){
-            //TODO: Write your code here
-            if (s.length() == 0) {
-                return 0;
-            }
-
-            Map<Character, Integer> lastseenMap = new HashMap<>();
-            int[] longest = {0, 1};
-
-            int start = 0;
-            int end = 0;
-
-            char ch = 0;
-            while (end < s.length()) {
-                ch = s.charAt(end);
-                if (lastseenMap.containsKey(ch)) {
-                    start = Math.max(start, lastseenMap.get((ch) + 1));
-                }
-                if (end + 1 - start > longest[1] - longest[0]) {
-                    longest = new int[]{start, end + 1};
-                }
-
-                lastseenMap.put(ch, end);
-                end++;
-            }
-
-            return longest[1] + longest[0];
-        }
-
-        // Question 4
-        public int[] sumZero(int n) {
-            //TODO: Write your code here
-            int [] result = new int[n];
-            int count = 0;
-            int index = 0;
-            if (n % 2 != 0){
-                result[0] = 0;
-                index++;
-            }
-
-            for (int i = 1; i < n / 2; i++){
-                result[index++] = i;
-                result[index++] = -i;
-            }
-            return result;
-        }
-
-        // Question 5
-        public int findKthLargest(int[] nums, int k) {
-            //TODO: Write your code here
-            PriorityQueue<Integer> maxHeap = new PriorityQueue<Integer>((nums1,nums2) -> nums2-nums1);
-
-            for (int i = 0; i < nums.length; i++){
-                maxHeap.offer(nums[i]);
-            }
-
-            int result = -1;
-            while (k-- > 0){
-                result = maxHeap.poll();
-            }
+        public int lengthOfLongestSubstring(String s) {
+        int i = 0;
+        int j = 0;
+        int max = 0;
+        HashMap<Character, Integer> map = new HashMap<>();
+        
+        while (j < s.length()){
+            map.put(s.charAt(j), map.getOrDefault(s.charAt(j),0) + 1);
             
-            return result;
-
+            if (map.size() == j - i + 1){
+                max= Math.max(max, j - i + 1);
+                j++;
+            }else if (map.size() < j - i + 1){
+                
+                while (map.size() < j - i + 1){
+                    map.put(s.charAt(i), map.get(s.charAt(i)) - 1);
+                    
+                    if (map.get(s.charAt(i)) == 0){
+                        map.remove(s.charAt(i));
+                    }
+                    i++;
+                }
+                j++;
+            }
         }
+        return max;
+    }
+
+    // Question 4
+    public int[] sumZero(int n) {
+        //TODO: Write your code here
+        public int[] sumZero(int n) {
+        int[] result = new int[n];
+        int sum = 0;
+        for (int i = 0; i < n-1; i++) {
+            result[i] = 2 + i;
+            sum = sum + result[i];
+        }
+        result[n-1] = -sum;
+            
+        return result;
+    }
+
+    // Question 5
+    public int findKthLargest(int[] nums, int k) {
+        //TODO: Write your code here
+        PriorityQueue<Integer> maxHeap = new PriorityQueue<Integer>((nums1,nums2) -> nums2-nums1);
+
+        for (int i = 0; i < nums.length; i++){
+            maxHeap.offer(nums[i]);
+        }
+
+        int result = -1;
+        while (k-- > 0){
+            result = maxHeap.poll();
+        }
+
+        return result;
+
+    }
 }
